@@ -345,6 +345,36 @@
             z-index: 1000;
         }
 
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 80px;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .language-toggle:hover {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
         .theme-toggle:hover {
             transform: scale(1.2) rotate(180deg);
             background: var(--primary);
@@ -448,57 +478,70 @@
     <div class="theme-toggle" onclick="toggleTheme()">
         <i class="fas fa-moon" id="theme-icon"></i>
     </div>
+    
+    <div class="language-toggle" onclick="toggleLanguage()">
+        <span class="flag" id="lang-flag">🇲🇳</span>
+        <span id="lang-text">EN</span>
+    </div>
 
     <div class="container">
         <div class="glass-card">
-            <h1>🌟 Сайн байна уу! Миний анхны вэбсайтад тавтай морил! 🌟</h1>
+            <h1 data-mn="🌟 Сайн байна уу! Миний анхны вэбсайтад тавтай морил! 🌟" 
+                data-en="🌟 Hello! Welcome to my first website! 🌟">🌟 Сайн байна уу! Миний анхны вэбсайтад тавтай морил! 🌟</h1>
         </div>
 
         <div class="glass-card">
-            <h2><i class="fas fa-user-circle"></i> Миний тухай</h2>
-            <p>Намайг <strong>Ану</strong> гэдэг. Би веб хөгжүүлэлт сурч эхэлж байна. Программчлал нь миний хобби бөгөөд шинэ ур чадвар эзэмшихийг хүсч байна!</p>
+            <h2><i class="fas fa-user-circle"></i> <span data-mn="Миний тухай" data-en="About Me">Миний тухай</span></h2>
+            <p data-mn="Намайг <strong>Ану</strong> гэдэг. Би веб хөгжүүлэлт сурч эхэлж байна. Программчлал нь миний хобби бөгөөд шинэ ур чадвар эзэмшихийг хүсч байна!" 
+               data-en="My name is <strong>Anu</strong>. I'm starting to learn web development. Programming is my hobby and I want to acquire new skills!">Намайг <strong>Ану</strong> гэдэг. Би веб хөгжүүлэлт сурч эхэлж байна. Программчлал нь миний хобби бөгөөд шинэ ур чадвар эзэмшихийг хүсч байна!</p>
 
             <div class="highlight">
-                <p><strong>🎯 Зорилго:</strong> Мэргэжлийн веб хөгжүүлэгч болж, хэрэглэгчдэд хэрэгтэй вэбсайтууд бүтээх!</p>
+                <p><strong data-mn="🎯 Зорилго:" data-en="🎯 Goal:">🎯 Зорилго:</strong> <span data-mn="Мэргэжлийн веб хөгжүүлэгч болж, хэрэглэгчдэд хэрэгтэй вэбсайтууд бүтээх!" data-en="Become a professional web developer and create useful websites for users!">Мэргэжлийн веб хөгжүүлэгч болж, хэрэглэгчдэд хэрэгтэй вэбсайтууд бүтээх!</span></p>
             </div>
         </div>
 
         <div class="glass-card">
-            <h2><i class="fas fa-heart"></i> Миний сонирхол</h2>
+            <h2><i class="fas fa-heart"></i> <span data-mn="Миний сонирхол" data-en="My Interests">Миний сонирхол</span></h2>
             <ul>
-                <li>💻 Веб хөгжүүлэлт сурах</li>
-                <li>📚 уран зохиолын ном унших</li>
-                <li>🎵 дуу сонсох</li>
-                <li>🏔️ аялах</li>
-                <li>🍳 Гэрийн хоол хийх</li>
+                <li data-mn="💻 Веб хөгжүүлэлт сурах" data-en="💻 Learning web development">💻 Веб хөгжүүлэлт сурах</li>
+                <li data-mn="📚 уран зохиолын ном унших" data-en="📚 Reading literature books">📚 уран зохиолын ном унших</li>
+                <li data-mn="🎵 дуу сонсох" data-en="🎵 Listening to music">🎵 дуу сонсох</li>
+                <li data-mn="🏔️ аялах" data-en="🏔️ Traveling">🏔️ аялах</li>
+                <li data-mn="🍳 Гэрийн хоол хийх" data-en="🍳 Cooking home meals">🍳 Гэрийн хоол хийх</li>
             </ul>
         </div>
 
         <div class="glass-card">
-            <h2><i class="fas fa-envelope"></i> Холбоо барих: 07085303840</h2>
-            <p>Хамтран ажиллах санал байвал эсвэл асуулт байвал доорх линкээр холбогдоорой: 
+            <h2><i class="fas fa-envelope"></i> <span data-mn="Холбоо барих: 07085303840" data-en="Contact: 07085303840">Холбоо барих: 07085303840</span></h2>
+            <p data-mn="Хамтран ажиллах санал байвал эсвэл асуулт байвал доорх линкээр холбогдоорой: 
+                <a href='mailto:anulkhagvazaya5@email.com'>anulkhagvazaya5@email.com</a>" 
+               data-en="If you have collaboration ideas or questions, please contact me through the link below: 
+                <a href='mailto:anulkhagvazaya5@email.com'>anulkhagvazaya5@email.com</a>">Хамтран ажиллах санал байвал эсвэл асуулт байвал доорх линкээр холбогдоорой: 
                 <a href="mailto:anulkhagvazaya5@email.com">anulkhagvazaya5@email.com</a></p>
 
             <div class="button-group">
                 <button class="button" onclick="showMessage()">
-                    <i class="fas fa-envelope"></i> Имэйл илгээх
+                    <i class="fas fa-envelope"></i> <span data-mn="Имэйл илгээх" data-en="Send Email">Имэйл илгээх</span>
                 </button>
                 <button class="button secondary" onclick="showInfo()">
-                    <i class="fas fa-info-circle"></i> Дэлгэрэнгүй мэдээлэл
+                    <i class="fas fa-info-circle"></i> <span data-mn="Дэлгэрэнгүй мэдээлэл" data-en="More Information">Дэлгэрэнгүй мэдээлэл</span>
                 </button>
             </div>
         </div>
 
         <div class="glass-card">
-            <h2><i class="fas fa-lightbulb"></i> Өнөөдрийн урам зориг</h2>
+            <h2><i class="fas fa-lightbulb"></i> <span data-mn="Өнөөдрийн урам зориг" data-en="Today's Motivation">Өнөөдрийн урам зориг</span></h2>
             <div class="highlight">
-                <p><em>"Энхийн цагт хэн их хөлс гаргана. Дайны цагт бага цус урсана."</em></p>
+                <p><em data-mn="&quot;Энхийн цагт хэн их хөлс гаргана. Дайны цагт бага цус урсана.&quot;" 
+                       data-en="&quot;Whoever sweats more in times of peace sheds less blood in times of war.&quot;">"Энхийн цагт хэн их хөлс гаргана. Дайны цагт бага цус урсана."</em></p>
             </div>
         </div>
 
         <div class="footer">
-            <p>© 2025 Миний хувийн вэбсайт | HTML, CSS, JavaScript ашигласан</p>
-            <p><small>Энэ вэбсайт нь миний анхны туршлага юм. Цаашид илүү олон функц нэмэн хөгжүүлэх болно.</small></p>
+            <p data-mn="© 2025 Миний хувийн вэбсайт | HTML, CSS, JavaScript ашигласан" 
+               data-en="© 2025 My Personal Website | Built with HTML, CSS, JavaScript">© 2025 Миний хувийн вэбсайт | HTML, CSS, JavaScript ашигласан</p>
+            <p><small data-mn="Энэ вэбсайт нь миний анхны туршлага юм. Цаашид илүү олон функц нэмэн хөгжүүлэх болно." 
+                       data-en="This website is my first experience. I will continue to develop it with more features.">Энэ вэбсайт нь миний анхны туршлага юм. Цаашид илүү олон функц нэмэн хөгжүүлэх болно.</small></p>
         </div>
     </div>
 
@@ -595,6 +638,40 @@
             modal.onclick = (e) => e.target === modal && modal.remove();
         }
 
+        function toggleLanguage() {
+            const currentLang = localStorage.getItem('language') || 'mn';
+            const newLang = currentLang === 'mn' ? 'en' : 'mn';
+            
+            // Update localStorage
+            localStorage.setItem('language', newLang);
+            
+            // Update UI
+            updateLanguage(newLang);
+        }
+
+        function updateLanguage(lang) {
+            const flag = document.getElementById('lang-flag');
+            const text = document.getElementById('lang-text');
+            
+            if (lang === 'en') {
+                flag.textContent = '🇺🇸';
+                text.textContent = 'МН';
+                document.documentElement.lang = 'en';
+            } else {
+                flag.textContent = '🇲🇳';
+                text.textContent = 'EN';
+                document.documentElement.lang = 'mn';
+            }
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-mn][data-en]').forEach(element => {
+                const content = element.getAttribute(`data-${lang}`);
+                if (content) {
+                    element.innerHTML = content;
+                }
+            });
+        }
+
         function toggleTheme() {
             document.body.style.filter = document.body.style.filter === 'invert(1) hue-rotate(180deg)' ? '' : 'invert(1) hue-rotate(180deg)';
             document.getElementById('theme-icon').className = 
@@ -616,6 +693,11 @@
         }, observerOptions);
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize language from localStorage
+            const savedLanguage = localStorage.getItem('language') || 'mn';
+            updateLanguage(savedLanguage);
+            
+            // Initialize scroll animations
             document.querySelectorAll('.glass-card').forEach(card => {
                 observer.observe(card);
             });
