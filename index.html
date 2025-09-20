@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Миний анхны вэбсайт</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #10b981;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --surface: rgba(255, 255, 255, 0.15);
+            --border: rgba(255, 255, 255, 0.2);
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: linear-gradient(135deg, 
+                #667eea 0%, 
+                #764ba2 25%, 
+                #f093fb 50%, 
+                #f5576c 75%, 
+                #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 20px 40px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .glass-card:hover::before {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 30px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+            cursor: pointer;
+        }
+
+        h2:hover {
+            transform: translateX(10px);
+            color: var(--secondary);
+            cursor: pointer;
+        }
+
+        h2:hover::before {
+            width: 6px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight::before {
+            content: '✨';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        li {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        li::before {
+            content: '▶';
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        li:hover {
+            transform: translateX(15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: var(--accent);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+        }
+
+        li:hover::before {
+            transform: rotate(90deg) scale(1.2);
+            color: var(--secondary);
+        }
+
+        li:hover::after {
+            left: 100%;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .button:active {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .button.secondary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .button.secondary {
+            background: linear-gradient(135deg, var(--secondary), #d946ef);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.2) rotate(180deg);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        p:hover {
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .highlight:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+            border-left-color: var(--secondary);
+        }
+
+        .highlight:hover::before {
+            animation: bounce 0.6s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        strong:hover {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            transform: scale(1.05);
+            display: inline-block;
+        }
+
+        strong {
+            background: linear-gradient(135deg, var(--secondary), #f97316);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .glass-card {
+                padding: 24px;
+                margin: 15px 0;
+                border-radius: 16px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .glass-card:nth-child(2) { animation-delay: 0.1s; }
+        .glass-card:nth-child(3) { animation-delay: 0.2s; }
+        .glass-card:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </div>
+
+    <div class="container">
+        <div class="glass-card">
+            <h1>🌟 Сайн байна уу! Миний анхны вэбсайтад тавтай морил! 🌟</h1>
+        </div>
+
+        <div class="glass-card">
+            <h2><i class="fas fa-user-circle"></i> Миний тухай</h2>
+            <p>Намайг <strong>Ану</strong> гэдэг. Би веб хөгжүүлэлт сурч эхэлж байна. Программчлал нь миний хобби бөгөөд шинэ ур чадвар эзэмшихийг хүсч байна!</p>
+
+            <div class="highlight">
+                <p><strong>🎯 Зорилго:</strong> Мэргэжлийн веб хөгжүүлэгч болж, хэрэглэгчдэд хэрэгтэй вэбсайтууд бүтээх!</p>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h2><i class="fas fa-heart"></i> Миний сонирхол</h2>
+            <ul>
+                <li>💻 Веб хөгжүүлэлт сурах</li>
+                <li>📚 уран зохиолын ном унших</li>
+                <li>🎵 дуу сонсох</li>
+                <li>🏔️ аялах</li>
+                <li>🍳 Гэрийн хоол хийх</li>
+            </ul>
+        </div>
+
+        <div class="glass-card">
+            <h2><i class="fas fa-envelope"></i> Холбоо барих: 07085303840</h2>
+            <p>Хамтран ажиллах санал байвал эсвэл асуулт байвал доорх линкээр холбогдоорой: 
+                <a href="mailto:anulkhagvazaya5@email.com">anulkhagvazaya5@email.com</a></p>
+
+            <div class="button-group">
+                <button class="button" onclick="showMessage()">
+                    <i class="fas fa-envelope"></i> Имэйл илгээх
+                </button>
+                <button class="button secondary" onclick="showInfo()">
+                    <i class="fas fa-info-circle"></i> Дэлгэрэнгүй мэдээлэл
+                </button>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h2><i class="fas fa-lightbulb"></i> Өнөөдрийн урам зориг</h2>
+            <div class="highlight">
+                <p><em>"Энхийн цагт хэн их хөлс гаргана. Дайны цагт бага цус урсана."</em></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Миний хувийн вэбсайт | HTML, CSS, JavaScript ашигласан</p>
+            <p><small>Энэ вэбсайт нь миний анхны туршлага юм. Цаашид илүү олон функц нэмэн хөгжүүлэх болно.</small></p>
+        </div>
+    </div>
+
+    <script>
+        function showMessage() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+                z-index: 9999;
+                animation: slideDown 0.3s ease;
+                backdrop-filter: blur(10px);
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-envelope" style="color: #a7f3d0;"></i>
+                    <div>
+                        <strong>Имэйл хаяг:</strong> example@email.com<br>
+                        <small>Бидэнтэй холбогдсонд баярлалаа! 🎉</small>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideUp 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        function showInfo() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                backdrop-filter: blur(5px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: rgba(255,255,255,0.95);
+                    backdrop-filter: blur(20px);
+                    padding: 40px;
+                    border-radius: 20px;
+                    max-width: 500px;
+                    margin: 20px;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+                    border: 1px solid rgba(255,255,255,0.2);
+                    animation: scaleIn 0.3s ease;
+                ">
+                    <h3 style="color: #6366f1; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-user"></i> Дэлгэрэнгүй мэдээлэл
+                    </h3>
+                    <div style="line-height: 1.8; color: #374151;">
+                        <p><i class="fab fa-github" style="color: #6366f1; width: 20px;"></i> <strong>GitHub:</strong> github.com/yourname</p>
+                        <p><i class="fab fa-linkedin" style="color: #0077b5; width: 20px;"></i> <strong>LinkedIn:</strong> linkedin.com/in/yourname</p>
+                        <p><i class="fas fa-phone" style="color: #10b981; width: 20px;"></i> <strong>Утас:</strong> +976 xxxx-xxxx</p>
+                        <p><i class="fas fa-map-marker-alt" style="color: #f59e0b; width: 20px;"></i> <strong>Байршил:</strong> Улаанбаатар, Монгол</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        background: linear-gradient(135deg, #ec4899, #d946ef);
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 25px;
+                        cursor: pointer;
+                        margin-top: 20px;
+                        float: right;
+                        font-weight: 500;
+                    ">
+                        <i class="fas fa-times"></i> Хаах
+                    </button>
+                    <div style="clear: both;"></div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            modal.onclick = (e) => e.target === modal && modal.remove();
+        }
+
+        function toggleTheme() {
+            document.body.style.filter = document.body.style.filter === 'invert(1) hue-rotate(180deg)' ? '' : 'invert(1) hue-rotate(180deg)';
+            document.getElementById('theme-icon').className = 
+                document.body.style.filter ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.glass-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateX(-50%) translateY(0); opacity: 1; }
+                to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes scaleIn {
+                from { transform: scale(0.8); opacity: 0; }
+                to { transform: scale(1); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
